@@ -1,0 +1,10 @@
+# 服务端口
+server:
+  port: 1111
+# 数据库连接
+spring:
+  datasource:
+    name: lic-dev
+    url: jdbc:mysql://127.0.0.1:3306/lms?useSSL=false&characterEncoding=utf8
+    username: root
+    password:
