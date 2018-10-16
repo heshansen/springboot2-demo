@@ -4,6 +4,7 @@ import com.yss.sofa.licensedemo.domain.SecurityUser;
 import com.yss.sofa.licensedemo.domain.User;
 import com.yss.sofa.licensedemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

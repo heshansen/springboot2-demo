@@ -1,9 +1,15 @@
 #配置通用内容
-
 # 多环境配置文件激活属性,以开发环境为默认配置
 spring:
+  application:
+    name: license-demo
   profiles:
     active: dev
+  cache:
+    type: redis
+    redis:
+      time-to-live: 1d  #很重要，缓存的有效时间，以便缓存的过期
+      cache-null-values: false #是否缓存空值
   datasource:
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
@@ -21,6 +27,10 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
 
 # pagehelper分页插件
 pagehelper:

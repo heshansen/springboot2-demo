@@ -3,8 +3,27 @@ server:
   port: 1111
 # 数据库连接
 spring:
+  redis:
+    host: 127.0.0.1 #对应redis所在的IP地址
+    port: 6379 #redis数据库对应的端口号
+    timeout: 60s  # 数据库连接超时时间，2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位
+    database: 0 #使用第1个数据库，一共默认有10个(0-15)
+    lettuce: # 连接池配置，2.0中直接使用jedis或者lettuce配置连接池
+      pool:
+        # 最大空闲连接数
+        max-idle: 500
+        # 最小空闲连接数
+        min-idle: 50
+        # 等待可用连接的最大时间，负数为不限制
+        max-wait:  -1s
+        # 最大活跃连接数，负数为不限制
+        max-active: -1
   datasource:
     name: lic-dev
     url: jdbc:mysql://127.0.0.1:3306/lms?useSSL=false&characterEncoding=utf8
     username: root
     password:
+# 日志配置
+logging:
+  level:
+    com.yss.sofa.licensedemo: debug

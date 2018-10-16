@@ -2,6 +2,7 @@ package com.yss.sofa.licensedemo.config;
 
 import com.yss.sofa.licensedemo.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,14 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //指定密码加密所使用的加密器为passwordEncoder()
         // 需要将密码加密后写入数据库
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
         auth.eraseCredentials(false);
-        //在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为ADMIN
-//        auth
-//                .inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-//                .withUser("admin")
-//                .password(new BCryptPasswordEncoder().encode("000000"))
-//                .roles("ADMIN");
     }
 
     /**
@@ -55,7 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf() //关闭csrf 不然不支持post
                 .disable();
-
     }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 }
