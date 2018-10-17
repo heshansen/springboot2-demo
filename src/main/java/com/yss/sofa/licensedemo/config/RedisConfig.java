@@ -45,6 +45,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                     sb.append(obj.toString());
                 }
                 logger.info("------> 自定义生成redis-key完成，keyGenerator=" + sb.toString());
+                logger.error("test logback error");
                 return sb.toString();
             }
         };
