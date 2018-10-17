@@ -20,11 +20,15 @@ public class UserControllerTest {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * 测试用户基础增删改查
+     * @throws Exception
+     */
     @Test
     @Transactional
     public void userCURD() throws Exception {
         User newUser = new User();
-        newUser.setUsername("admin");
+        newUser.setUsername("test");
         newUser.setPassword("123456");
         newUser.setStatus("0");
         newUser.setRemark("testUser");

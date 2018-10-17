@@ -3,13 +3,16 @@
 spring:
   application:
     name: license-demo
+  #根据pom.xml的值动态配置运行环境，默认dev，
   profiles:
-    active: dev
+    active: @activatedProperties@
+  #缓存策略
   cache:
     type: redis
     redis:
       time-to-live: 1d  #很重要，缓存的有效时间，以便缓存的过期
       cache-null-values: false #是否缓存空值
+  #公共数据库连接配置
   datasource:
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
