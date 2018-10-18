@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/hello").permitAll()
+                .antMatchers("/hello","/image/*","/css/*").permitAll()
 //                .antMatchers("/user/**").hasRole("ROLE_ADMIN")  //此处要把 ROLE_ 去除
                 .antMatchers("/user/*").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
