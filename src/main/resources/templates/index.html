@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <title>许可管理系统首页-demo</title>
+
+<!--引用替换公共的头部header.html 定义的 header片段-->
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8">
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<h1>欢迎进入许可管理系统!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="注销"/>
-</form>
+<h1 th:inline="text" align="center">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<h1 align="center">欢迎进入赢时胜许可管理系统!</h1>
+
+
+<!-- 公共 的 定义好的 fotter模板引用  无参  -->
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

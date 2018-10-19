@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<!--引用替换公共的头部header.html 定义的 header片段-->
+<head th:replace="fragments/header :: header">
     <meta charset="UTF-8">
-    <title>Insert title here</title>
 </head>
 <body>
-<!--背景图-->
-<div style="position:absolute;z-index:-1;width:100%;height:100%;">
-    <img th:src="@{image/login-background.jpg}" width="100%" height="100%"/>
-</div>
-<h1 align="center">欢迎登录赢时胜许可管理系统</h1>
-<hr>
-<div align="center">
-    <div th:if="${param.error}">
-        用户名或密码错
+
+<div class="container">
+    <div class="starter-template">
+        <h2>欢迎登录赢时胜许可管理系统</h2><br><br>
+
+        <p th:if="${param.error}" class="bg-danger">用户名或密码错误，请重试</p>
+        <div align="center">
+            <form th:action="@{/login}" method="post">
+                <label>用户名:</label>&nbsp;
+                <input name="username"/><br><br>
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;密码:</label>&nbsp;
+                <input name="password"><br/><br/>
+                <input type="submit" value="登陆">
+            </form>
+        </div>
     </div>
-    <div th:if="${param.logout}">
-        您已注销成功
-    </div>
-    <form th:action="@{/login}" method="post">
-        用户名:<input name="username"/><br>
-        密&nbsp;&nbsp;&nbsp;码:<input name="password"><br/>
-        <input type="submit" value="登陆">
-    </form>
+
 </div>
+
+<!-- 公共 的 定义好的 fotter模板引用  无参  -->
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

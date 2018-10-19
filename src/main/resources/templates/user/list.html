@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--引用替换公共的头部header.html 定义的 header片段-->
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- page content -->
+<div class="container">
+    <h3 th:text="${userModel.title}">用户管理</h3>
+    <div>
+        <a class="btn btn-default" href="/user/form.html" th:href="@{/user/form}">创建用户</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>用户名</td>
+            <td>状态</td>
+            <td>备注</td>
+            <td>管理</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 判断userModel.userList 是否没有值 -->
+        <tr th:if="${userModel.userList.size() eq 0}">
+            <td colspan="3">没有用户信息！</td>
+        </tr>
+
+        <!-- th:each 迭代 -->
+        <tr th:each="user : ${userModel.userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:if="${user.status} eq '0'">正常</td>
+            <td th:if="${user.status} eq '1'">注销</td>
+            <td th:text="${user.remark}"></td>
+            <td>
+                <a class="btn btn-danger" th:href="@{/user/reset/{userId}(userId=${user.id})}">重置密码</a>
+                <a class="btn btn-danger" th:href="@{/user/cancel/{userId}(userId=${user.id})}">注销</a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
